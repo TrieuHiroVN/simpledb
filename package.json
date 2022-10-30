@@ -1,0 +1,21 @@
+{
+  "name": "quick.json",
+  "version": "1.0.0",
+  "description": "Quick JSON Database",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "keywords": [
+    "db",
+    "database",
+    "json",
+    "quick"
+  ],
+  "author": "TrieuHiroVN",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.7",
+    "typescript": "^4.8.4"
+  }
+}
