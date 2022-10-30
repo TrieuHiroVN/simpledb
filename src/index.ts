@@ -25,13 +25,13 @@ class Database {
 
     public set (key: string, value: Data): void {
         if (typeof key !== 'string') throw new TypeError("'key' must be a non-empty string")
-        var values: any = {};
+        var values: any = {}
         try {
             values = readJSON(pathResolve(this.path))
         } catch {
-            writeJSON(pathResolve(this.path), {}, true);
-        };
-        values[key] = value;
+            writeJSON(pathResolve(this.path), {}, true)
+        }
+        values[key] = value
         writeJSON(pathResolve(this.path), values, true)
     }
 

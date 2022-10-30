@@ -32,7 +32,6 @@ class Database {
         catch (_a) {
             (0, base_1.writeJSON)(pathResolve(this.path), {}, true);
         }
-        ;
         values[key] = value;
         (0, base_1.writeJSON)(pathResolve(this.path), values, true);
     }
