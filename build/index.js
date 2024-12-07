@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var node_path_1 = require("node:path");
+var Path = require("node:path");
 var base_1 = require("./base");
 function pathResolve(path) {
-    return node_path_1.default.resolve(path);
+    return Path.resolve(path);
 }
 var Database = /** @class */ (function () {
     function Database(path) {

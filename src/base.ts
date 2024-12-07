@@ -1,5 +1,5 @@
-import fs from 'node:fs'
-import Path from 'node:path'
+const fs = require("node:fs")
+const Path = require("node:path")
 
 export type Data = string | number | boolean | object | null
 

@@ -1,4 +1,4 @@
-import Path from 'node:path'
+const Path = require("node:path")
 import { readJSON, writeJSON, Data } from './base'
 
 function pathResolve (path: string): string {

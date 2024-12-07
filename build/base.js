@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readJSON = readJSON;
 exports.writeJSON = writeJSON;
-var node_fs_1 = require("node:fs");
-var node_path_1 = require("node:path");
+var fs = require("node:fs");
+var Path = require("node:path");
 function readJSON(path) {
     var data;
     try {
-        data = node_fs_1.default.readFileSync(node_path_1.default.resolve(path));
+        data = fs.readFileSync(Path.resolve(path));
     }
     catch (_a) {
         throw new Error("the database '".concat(path, "' is not exist"));
@@ -28,8 +28,8 @@ function writeJSON(path, data, check) {
     catch (_a) {
         throw new Error('circular structures cannot be stored');
     }
-    node_fs_1.default.writeFileSync(path, strData);
-    if (check && node_fs_1.default.readFileSync(path, 'utf-8') !== strData) {
+    fs.writeFileSync(path, strData);
+    if (check && fs.readFileSync(path, 'utf-8') !== strData) {
         var path2 = "backup-".concat(Date.now(), ".json");
         writeJSON(path2, data, false);
         throw new Error("error writing JSON in path '".concat(path, "', backup saved in '").concat(path2, "'"));
