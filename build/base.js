@@ -1,30 +1,27 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writeJSON = exports.readJSON = void 0;
-const node_fs_1 = __importDefault(require("node:fs"));
-const node_path_1 = __importDefault(require("node:path"));
+exports.readJSON = readJSON;
+exports.writeJSON = writeJSON;
+var node_fs_1 = require("node:fs");
+var node_path_1 = require("node:path");
 function readJSON(path) {
-    let data;
+    var data;
     try {
         data = node_fs_1.default.readFileSync(node_path_1.default.resolve(path));
     }
     catch (_a) {
-        throw new Error(`the database '${path}' is not exist`);
+        throw new Error("the database '".concat(path, "' is not exist"));
     }
     try {
         data = JSON.parse(data);
     }
     catch (_b) {
-        throw new Error(`cannot parse JSON at path '${path}'`);
+        throw new Error("cannot parse JSON at path '".concat(path, "'"));
     }
     return data;
 }
-exports.readJSON = readJSON;
 function writeJSON(path, data, check) {
-    let strData;
+    var strData;
     try {
         strData = JSON.stringify(data, null, '\t');
     }
@@ -33,9 +30,8 @@ function writeJSON(path, data, check) {
     }
     node_fs_1.default.writeFileSync(path, strData);
     if (check && node_fs_1.default.readFileSync(path, 'utf-8') !== strData) {
-        const path2 = `backup-${Date.now()}.json`;
+        var path2 = "backup-".concat(Date.now(), ".json");
         writeJSON(path2, data, false);
-        throw new Error(`error writing JSON in path '${path}', backup saved in '${path2}'`);
+        throw new Error("error writing JSON in path '".concat(path, "', backup saved in '").concat(path2, "'"));
     }
 }
-exports.writeJSON = writeJSON;

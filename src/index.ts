@@ -1,4 +1,3 @@
-import fs, { read } from 'node:fs'
 import Path from 'node:path'
 import { readJSON, writeJSON, Data } from './base'
 
@@ -23,7 +22,7 @@ class Database {
         return readJSON(pathResolve(this.path))[key] ? true : false
     }
 
-    public set (key: string, value: Data): void {
+    public set (key: string, value: Data): Data {
         if (typeof key !== 'string') throw new TypeError("'key' must be a non-empty string")
         var values: any = {}
         try {
@@ -33,6 +32,7 @@ class Database {
         }
         values[key] = value
         writeJSON(pathResolve(this.path), values, true)
+        return value
     }
 
     public delete (key: string): void {

@@ -1,28 +1,25 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const node_path_1 = __importDefault(require("node:path"));
-const base_1 = require("./base");
+var node_path_1 = require("node:path");
+var base_1 = require("../src/base");
 function pathResolve(path) {
     return node_path_1.default.resolve(path);
 }
-class Database {
-    constructor(path) {
+var Database = /** @class */ (function () {
+    function Database(path) {
         this.path = path;
     }
-    get(key) {
+    Database.prototype.get = function (key) {
         if (typeof key !== 'string')
             throw new TypeError("'key' must be a non-empty string");
         return (0, base_1.readJSON)(pathResolve(this.path))[key];
-    }
-    has(key) {
+    };
+    Database.prototype.has = function (key) {
         if (typeof key !== 'string')
             throw new TypeError("'key' must be a non-empty string");
         return (0, base_1.readJSON)(pathResolve(this.path))[key] ? true : false;
-    }
-    set(key, value) {
+    };
+    Database.prototype.set = function (key, value) {
         if (typeof key !== 'string')
             throw new TypeError("'key' must be a non-empty string");
         var values = {};
@@ -34,16 +31,18 @@ class Database {
         }
         values[key] = value;
         (0, base_1.writeJSON)(pathResolve(this.path), values, true);
-    }
-    delete(key) {
+        return value;
+    };
+    Database.prototype.delete = function (key) {
         if (typeof key !== 'string')
             throw new TypeError("'key' must be a non-empty string");
-        const values = (0, base_1.readJSON)(pathResolve(this.path));
+        var values = (0, base_1.readJSON)(pathResolve(this.path));
         delete values[key];
         (0, base_1.writeJSON)(pathResolve(this.path), values, true);
-    }
-    clear() {
+    };
+    Database.prototype.clear = function () {
         (0, base_1.writeJSON)(pathResolve(this.path), {}, true);
-    }
-}
+    };
+    return Database;
+}());
 module.exports = Database;
